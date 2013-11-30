@@ -13,22 +13,20 @@ describe 'monit::default' do
     expect(chef_run).to enable_service('monit')
   end
 
-  context "ubuntu system" do
-    it 'create direcory for custom services' do
-      expect(chef_run).to create_directory('/etc/monit/conf.d').with(
-        user:   'root',
-        group:  'root'
-      )
-    end
+  it 'create direcory for custom services' do
+    expect(chef_run).to create_directory('/etc/monit/conf.d').with(
+      user:   'root',
+      group:  'root'
+    )
+  end
 
-    it 'create main monit config' do
-      expect(chef_run).to create_template('/etc/monit/monitrc')
-    end
+  it 'create main monit config' do
+    expect(chef_run).to create_template('/etc/monit/monitrc')
+  end
 
-    it 'reload daemon on change config' do
-      resource = chef_run.template('/etc/monit/monitrc')
-      expect(resource).to notify('service[monit]').to(:restart)
-    end
+  it 'reload daemon on change config' do
+    resource = chef_run.template('/etc/monit/monitrc')
+    expect(resource).to notify('service[monit]').to(:restart)
   end
 
   context "rhel system" do
@@ -49,6 +47,16 @@ describe 'monit::default' do
     it 'reload daemon on change config' do
       resource = chef_run.template('/etc/monit.conf')
       expect(resource).to notify('service[monit]').to(:restart)
+    end
+  end
+
+  context "mail to attribute" do
+    before do
+      Fauxhai.mock(platform: platfom, version: platfom_version) # fqdn == fauxhai.local
+    end
+
+    it 'it should be monit@fauxhai.local' do
+      expect(chef_run).to render_file('/etc/monit/monitrc').with_content(/monit@fauxhai\.local/)
     end
   end
 
