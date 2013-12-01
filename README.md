@@ -1,12 +1,6 @@
-# monit cookbook
+# Chef monit cookbook with TDD (example of tests)
 
-# Requirements
-
-# Usage
-
-# Attributes
-
-# Recipes
+ * [Development of Chef cookbooks by TDD](http://leopard.in.ua/2013/12/02/chef-and-tdd/)
 
 # Author
 
