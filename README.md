@@ -1,6 +1,6 @@
 # Chef monit cookbook with TDD (example of tests)
 
- * [Development of Chef cookbooks by TDD](http://leopard.in.ua/2013/12/02/chef-and-tdd/)
+ * [Development of Chef cookbooks by TDD](http://leopard.in.ua/2013/12/01/chef-and-tdd/)
 
 # Author
 
